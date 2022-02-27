@@ -1,16 +1,16 @@
 //
-//  ViewController.swift
+//  TodoListViewController.swift
 //  TodoApp_firebase
 //
-//  Created by Emily Nozaki on 2022/02/21.
+//  Created by Emily Nozaki on 2022/02/27.
 //
 
 import UIKit
 import Firebase
 import FirebaseFirestore
 
-
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TodoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     
     @IBOutlet weak var table: UITableView!
     
@@ -33,7 +33,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //firebaseから最新の保存データを取得
         Auth.auth().addStateDidChangeListener{ (auth, user) in
             
             guard let user = user else {
@@ -54,6 +53,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     //
                     
                     print(self.todoArray)
+                    //画面が戻ってきた時に更新する
+                    self.presentingViewController?.beginAppearanceTransition(true, animated: animated)
+                    self.presentingViewController?.endAppearanceTransition()
+                    self.table.reloadData()
                     
                     
                 } else {
@@ -62,19 +65,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             }
         }
-        //画面が戻ってきた時に更新する
-        self.presentingViewController?.beginAppearanceTransition(true, animated: animated)
-        self.presentingViewController?.endAppearanceTransition()
-        self.table.reloadData()
+
     }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        print("🦄")
+        return todoArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "こんんひ"
+        cell.textLabel?.text = todoArray[indexPath.row]
         return cell
     }
     
@@ -87,17 +89,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //削除機能
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        table.reloadData()
+        
+        
+        
         return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //配列から削除
-            
+            todoArray.remove(at: indexPath.row)
+            detailArray.remove(at: indexPath.row)
+            table.reloadData()
+            //更新バージョンを保存
+            db.collection("users").document(userUid).setData([
+                "todoAll.todo": todoArray,
+                "todoAll.detail": detailArray
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
         }
     }
     
-    
 }
-
