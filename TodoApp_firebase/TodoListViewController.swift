@@ -41,13 +41,18 @@ class TodoListViewController: UIViewController, UITableViewDelegate, UITableView
                 return
             }
             self.userUid = user.uid
+            
             let docRef = self.db.collection("users").document(self.userUid)
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     print("Document data: \(dataDescription)")
-                    self.todoArray = document.get("todoAll.todo") as! Array<String>
-                    self.detailArray = document.get("todoAll.detail") as! Array<String>
+                    if let todoArray = document.get("todoAll.todo") {
+                        self.todoArray = todoArray as! Array<String>
+                    }
+                    if let detailArray = document.get("todoAll.detail") {
+                        self.detailArray = detailArray as! Array<String>
+                    }
                     //                    if let dueArray = document.get("todoAll.due") {
                     //                        self.dueArray = dueArray as! Array<Date>
                     //
@@ -65,9 +70,19 @@ class TodoListViewController: UIViewController, UITableViewDelegate, UITableView
                 
             }
         }
-
+        
     }
-
+    
+    @IBAction func signOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.dismiss(animated: true, completion: nil)
+        } catch let error {
+            print("エラー")
+        }
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("🦄")

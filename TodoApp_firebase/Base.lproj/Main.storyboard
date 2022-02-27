@@ -94,6 +94,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icc-oZ-gRn">
+                                <rect key="frame" x="114" y="469" width="187" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create an acount →"/>
+                                <connections>
+                                    <action selector="createAcount:" destination="rq0-7o-jkF" eventType="touchUpInside" id="7Iy-ar-VlL"/>
+                                    <action selector="createAcount:" destination="b92-vb-ZPg" eventType="touchUpInside" id="ixe-i7-goL"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nug-Um-nM1">
                                 <rect key="frame" x="144" y="141" width="127" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -102,18 +112,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="107-SE-rNM">
-                                <rect key="frame" x="137" y="562" width="141" height="31"/>
+                                <rect key="frame" x="93" y="570" width="229" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign In →"/>
+                                <connections>
+                                    <action selector="login:" destination="rq0-7o-jkF" eventType="touchUpInside" id="g82-dF-5NE"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="you already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypt-B7-3rb">
-                                <rect key="frame" x="82" y="541" width="251" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D8O-6I-bQm">
                                 <rect key="frame" x="122" y="341" width="171" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -134,30 +140,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icc-oZ-gRn">
-                                <rect key="frame" x="114" y="469" width="187" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="you already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypt-B7-3rb">
+                                <rect key="frame" x="20" y="541" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Create acount →"/>
-                                <connections>
-                                    <action selector="createAcount:" destination="rq0-7o-jkF" eventType="touchUpInside" id="7Iy-ar-VlL"/>
-                                    <action selector="createAcount:" destination="b92-vb-ZPg" eventType="touchUpInside" id="ixe-i7-goL"/>
-                                    <segue destination="953-6t-4B5" kind="show" identifier="todoList" id="PDd-D8-eXn"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hIA-7w-vA5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="email" destination="v5h-e9-7me" id="Aak-vC-ljR"/>
+                        <outlet property="goNext" destination="icc-oZ-gRn" id="Qdy-vB-Zsf"/>
                         <outlet property="password" destination="D8O-6I-bQm" id="sRa-uR-ytc"/>
+                        <outlet property="switchButton" destination="107-SE-rNM" id="KkX-nb-Tdf"/>
+                        <outlet property="switchText" destination="ypt-B7-3rb" id="fNU-a1-wrS"/>
+                        <outlet property="titleLabel" destination="Nug-Um-nM1" id="219-Kk-Ho0"/>
+                        <segue destination="953-6t-4B5" kind="show" identifier="todoList" id="STQ-28-KQY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aon-jY-hnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="b92-vb-ZPg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1064" y="98"/>
+            <point key="canvasLocation" x="1063.768115942029" y="97.767857142857139"/>
         </scene>
         <!--Todo List View Controller-->
         <scene sceneID="GCo-lF-uHP">
@@ -191,6 +198,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IM-ge-GcF">
+                                <rect key="frame" x="6" y="75" width="75" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="signOut"/>
+                                <connections>
+                                    <action selector="signOut:" destination="953-6t-4B5" eventType="touchUpInside" id="N97-gf-GLy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rEk-42-6cx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
