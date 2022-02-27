@@ -23,7 +23,7 @@ class AddTodoViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     //配列
     var todoArray: Array<String> = []
     var detailArray: Array<String> = []
-    var dueArray: Array<Date> = []
+    var dueArray: Array<Any> = []
     //全部をまとめるためのdictionary
     var todoDictionary: Dictionary<String, Array<Any>> = [:]
     
@@ -62,10 +62,16 @@ class AddTodoViewController: UIViewController, UITextFieldDelegate, UITextViewDe
                 if let document = document, document.exists {
                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     print("Document data: \(dataDescription)")
-                    self.todoArray = document.get("todoAll.todo") as! Array<String>
-                    self.detailArray = document.get("todoAll.detail") as! Array<String>
-                    //                    if let dueArray = document.get("todoAll.due") {
-                    //                        self.dueArray = dueArray as! Array<Date>
+                    if let todoArray = document.get("todoAll.todo") {
+                        self.todoArray = todoArray as! Array<String>
+                    }
+                    if let detailArray = document.get("todoAll.detail") {
+                        self.detailArray = detailArray as! Array<String>
+                    }
+                    if let dueTimestamp = document.get("todoAll.due") {
+                        
+                        self.dueArray = dueTimestamp as! Array<Timestamp>
+                    }
                     
                 } else {
                     print("Document does not exist")
